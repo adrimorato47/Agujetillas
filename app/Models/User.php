@@ -29,4 +29,26 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // En tu modelo User.php existente, añade:
+
+    public function diasPlantilla()
+    {
+        return $this->hasMany(DiaPlantilla::class);
+    }
+
+    public function ejercicios()
+    {
+        return $this->hasMany(Ejercicio::class);
+    }
+
+    public function gruposMusculares()
+    {
+        return $this->hasMany(GrupoMuscular::class);
+    }
+
+    public function registrosEntrenamientos()
+    {
+        return $this->hasMany(RegistroEntrenamiento::class);
+    }
 }

@@ -10,16 +10,12 @@ return new class extends Migration
     {
         Schema::create('dia_ejercicio', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('dia_grupo_id')
-                  ->constrained('dia_grupo')
-                  ->onDelete('cascade')
-                  ->onUpdate('no action');
-            $table->foreignId('ejercicio_id')
-                  ->constrained('ejercicios')
-                  ->onDelete('restrict')
-                  ->onUpdate('no action');
-            $table->integer('orden_ejercicio')->nullable();
+            $table->foreignId('dia_grupo_id')->constrained()->onDelete('cascade');
+            $table->foreignId('ejercicio_id')->constrained()->onDelete('restrict');
+            $table->integer('orden')->nullable();
             $table->timestamps();
+
+            $table->unique(['dia_grupo_id', 'ejercicio_id'], 'unique_dia_ejercicio');
         });
     }
 

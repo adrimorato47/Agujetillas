@@ -8,20 +8,20 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('ejercicios', function (Blueprint $table) {
+        Schema::create('dias_plantilla', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('nombre');
-            $table->text('descripcion')->nullable();
-            $table->string('video_url')->nullable();
+            $table->date('fecha');  // ← CAMBIADO A DATE
+            $table->string('nombre')->nullable();  // opcional: "Semana 1 - Fuerza"
             $table->timestamps();
 
-            $table->index(['user_id', 'nombre']);
+            // Índice para búsquedas rápidas
+            $table->index(['user_id', 'fecha']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('ejercicios');
+        Schema::dropIfExists('dias_plantilla');
     }
 };

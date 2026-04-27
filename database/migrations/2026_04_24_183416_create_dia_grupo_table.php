@@ -9,17 +9,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dia_grupo', function (Blueprint $table) {
-            $table->id(); // PRIMARY KEY
-            $table->foreignId('dia_id')
-                  ->constrained('dias')
-                  ->onDelete('cascade')
-                  ->onUpdate('no action');
-            $table->foreignId('grupo_muscular_id')
-                  ->constrained('grupos_musculares')
-                  ->onDelete('restrict')
-                  ->onUpdate('no action');
+            $table->id();
+            $table->foreignId('dia_plantilla_id')->constrained('dias_plantilla')->onDelete('cascade');
+            $table->foreignId('grupo_muscular_id')->constrained()->onDelete('restrict');
             $table->integer('orden')->nullable();
             $table->timestamps();
+
+            // Evitar duplicados
+            $table->unique(['dia_plantilla_id', 'grupo_muscular_id'], 'unique_dia_grupo');
         });
     }
 
