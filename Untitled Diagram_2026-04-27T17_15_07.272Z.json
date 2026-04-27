@@ -1,0 +1,985 @@
+{
+  "tables": [
+    {
+      "id": "A-QznMB5m339z0B7Kj--4",
+      "name": "users",
+      "comment": "",
+      "color": "#175e7a",
+      "fields": [
+        {
+          "id": "dE6hPS_ZyUibg1kcNntu8",
+          "name": "id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": true,
+          "notNull": true,
+          "increment": true,
+          "comment": ""
+        },
+        {
+          "id": "Uu5E1bADYiEdrZUGZ4OCz",
+          "name": "name",
+          "type": "VARCHAR(255)",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "s6zyq5HpbdygxLns9gwYC",
+          "name": "email",
+          "type": "VARCHAR(255)",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "Kkudw59zF7ZCart8Et5es",
+          "name": "password",
+          "type": "VARCHAR(255)",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "qrwiRKybasda8ur0IkSnG",
+          "name": "remember_token",
+          "type": "VARCHAR(100)",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "93sGNTCTQH1N1Kj0w627_",
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "5yBdVmdJGg0TYq9bOpEg1",
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        }
+      ],
+      "indices": [],
+      "x": -1530.6082663525435,
+      "y": -601.5281231374361
+    },
+    {
+      "id": "wCcBmDyHrBifUYQpNlnXc",
+      "name": "dias_plantilla",
+      "comment": "",
+      "color": "#175e7a",
+      "fields": [
+        {
+          "id": "KV2vbVVg6_H4okLblSS73",
+          "name": "id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": true,
+          "notNull": true,
+          "increment": true,
+          "comment": ""
+        },
+        {
+          "id": "fcHLu6Y0Ydp3nVZujmn3a",
+          "name": "user_id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "304rkdb8mxgOU9sXIBIzJ",
+          "name": "fecha",
+          "type": "DATE",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "Ut67knl6sMxvxs0NKKhNA",
+          "name": "nombre",
+          "type": "VARCHAR(255)",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "XqjZ1muyjmurmR2eta0oy",
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "kLtmtOEaBJoKgS14Q6Z3W",
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        }
+      ],
+      "indices": [
+        {
+          "id": 0,
+          "fields": [
+            "user_id",
+            "fecha"
+          ],
+          "name": "idx_dias_user_fecha",
+          "unique": false
+        }
+      ],
+      "x": -980.2161759647377,
+      "y": -467.1183140120922
+    },
+    {
+      "id": "Id9DQLE2xZepVelYD0mxa",
+      "name": "grupos_musculares",
+      "comment": "",
+      "color": "#175e7a",
+      "fields": [
+        {
+          "id": "k7Q1TGvTpMi3Qw7UF2Dn4",
+          "name": "id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": true,
+          "notNull": true,
+          "increment": true,
+          "comment": ""
+        },
+        {
+          "id": "lUgEI0Du8pLXcfYL6UgXa",
+          "name": "user_id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "cuDv4HqzgSiQTKosIbmhf",
+          "name": "nombre",
+          "type": "VARCHAR(255)",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "kPyJa2iPrhh2XN4epPySy",
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "O5zsMoZeK4_lswjncQ5Lt",
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        }
+      ],
+      "indices": [
+        {
+          "id": 1,
+          "fields": [
+            "user_id",
+            "nombre"
+          ],
+          "name": "idx_grupos_user_nombre",
+          "unique": false
+        }
+      ],
+      "x": -1546.0722194113107,
+      "y": -110.90528212762854
+    },
+    {
+      "id": "veKGMDYzaaMYQ3KD-Wj8f",
+      "name": "ejercicios",
+      "comment": "",
+      "color": "#175e7a",
+      "fields": [
+        {
+          "id": "iCJW7UxxTLPWudLxRT-1S",
+          "name": "id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": true,
+          "notNull": true,
+          "increment": true,
+          "comment": ""
+        },
+        {
+          "id": "lmrE21qaP4VNiif5MgqRr",
+          "name": "user_id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "MiLVLVRSvu6izVwPJGypo",
+          "name": "nombre",
+          "type": "VARCHAR(255)",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "msX-_hVQBJaBkXtoPxLuU",
+          "name": "descripcion",
+          "type": "TEXT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "Z11hkEJR8Savp41gX1Wtq",
+          "name": "video_url",
+          "type": "VARCHAR(500)",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "ieiLwy67o_J48ldhY69lW",
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "lJc8QqMarKYaMk3Y2OdgJ",
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        }
+      ],
+      "indices": [
+        {
+          "id": 2,
+          "fields": [
+            "user_id",
+            "nombre"
+          ],
+          "name": "idx_ejercicios_user_nombre",
+          "unique": false
+        }
+      ],
+      "x": -295.56301560680095,
+      "y": -626.5928224689227
+    },
+    {
+      "id": "WiuV4uIdc-lwlsGhc5j7f",
+      "name": "dia_grupo",
+      "comment": "",
+      "color": "#175e7a",
+      "fields": [
+        {
+          "id": "ayOfa_4pFAGh3sru3hFhb",
+          "name": "id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": true,
+          "notNull": true,
+          "increment": true,
+          "comment": ""
+        },
+        {
+          "id": "a6OkgXRiDHHeXzSuxTkAz",
+          "name": "dia_plantilla_id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "tSiF3N0w5Q0he7x1XaaoK",
+          "name": "grupo_muscular_id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "Vxf4Fx2ngJA5GxWyXTzHF",
+          "name": "orden",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "zh6APn8_NVLlQpNntCn7T",
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "JGJNgloQ698hCZ6KOASLc",
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        }
+      ],
+      "indices": [
+        {
+          "id": 3,
+          "fields": [
+            "dia_plantilla_id",
+            "grupo_muscular_id"
+          ],
+          "name": "unique_dia_grupo",
+          "unique": true
+        }
+      ],
+      "x": -1124.7186554212042,
+      "y": -114.49937017727768,
+      "locked": false
+    },
+    {
+      "id": "rp5qxnkGJuY7LeyGxwl5N",
+      "name": "dia_ejercicio",
+      "comment": "",
+      "color": "#175e7a",
+      "fields": [
+        {
+          "id": "rIy0ZPIoJ7jtIoSo4lsuR",
+          "name": "id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": true,
+          "notNull": true,
+          "increment": true,
+          "comment": ""
+        },
+        {
+          "id": "v2P0R658aydkzVLj3G1vk",
+          "name": "dia_grupo_id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "OawFDlgi2ibmYDEao8F7R",
+          "name": "ejercicio_id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "0LKNDGDXza1TJo5BUQ1_Z",
+          "name": "orden",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "wZm9ZtIXx8XiBD74nsom6",
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "EV8SVhQJEVWs2g1RdgKsO",
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        }
+      ],
+      "indices": [
+        {
+          "id": 4,
+          "fields": [
+            "dia_grupo_id",
+            "ejercicio_id"
+          ],
+          "name": "unique_dia_ejercicio",
+          "unique": true
+        }
+      ],
+      "x": -750.8037559073725,
+      "y": -109.25953280240151
+    },
+    {
+      "id": "Ea9HmOibwtAq_7YUcDsiB",
+      "name": "series_plantilla",
+      "comment": "",
+      "color": "#175e7a",
+      "fields": [
+        {
+          "id": "_2Xu0LcoxwLQ2-ZcUfhfl",
+          "name": "id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": true,
+          "notNull": true,
+          "increment": true,
+          "comment": ""
+        },
+        {
+          "id": "kuG2q8BxVs5MU0EKzwAvj",
+          "name": "dia_ejercicio_id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "87vMdMkMT2nR17LLWnF4E",
+          "name": "numero_serie",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "aJ0YaUrrIwZVtp_ZOfMCb",
+          "name": "repeticiones_planificadas",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "uv2cbk7QdiGnuNZl2qH2M",
+          "name": "peso_planificado",
+          "type": "DECIMAL(8,2)",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "IQb5W8OKFJRwCMB7HiQfZ",
+          "name": "descanso_segundos",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "2f48jyyj31tr0o_w6VKf_",
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "heFUL4ipB4IWZvaN07rU1",
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        }
+      ],
+      "indices": [
+        {
+          "id": 5,
+          "fields": [
+            "dia_ejercicio_id",
+            "numero_serie"
+          ],
+          "name": "unique_serie_orden",
+          "unique": true
+        }
+      ],
+      "x": -412.64197109037036,
+      "y": 71.86841229650986,
+      "locked": true
+    },
+    {
+      "id": "bPAYJAqScFleBLyAjb45a",
+      "name": "registro_entrenamientos",
+      "comment": "",
+      "color": "#175e7a",
+      "fields": [
+        {
+          "id": "qo32s2NEhpGeSt7ebiDLa",
+          "name": "id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": true,
+          "notNull": true,
+          "increment": true,
+          "comment": ""
+        },
+        {
+          "id": "wsBE36unti1lzzhOYQ9bi",
+          "name": "user_id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "s0mPYoa557lpWBPBGrwE1",
+          "name": "dia_plantilla_id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "cqtTX92BK4im6BIa__tLm",
+          "name": "fecha_real",
+          "type": "DATE",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "MeU05Agm1SO5GaKB40j4m",
+          "name": "ejercicio_id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "FDJSSPMkGV4VOuFin-hMR",
+          "name": "serie_numero",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "Ba1wLV3IRz43ZzYULAeMv",
+          "name": "repeticiones_realizadas",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": true,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "yORadFC3m008QNR06byJB",
+          "name": "peso_realizado",
+          "type": "DECIMAL(8,2)",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "Zs9zUrbvJX8tFDgaYW9x2",
+          "name": "completado",
+          "type": "BOOLEAN",
+          "default": "true",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "3O-djcsKe7eIefievbNDZ",
+          "name": "notas",
+          "type": "TEXT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "g4SYaf8ztC76OIJo6qbmH",
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        },
+        {
+          "id": "rRPz_lm-kHYGGfGcPbpf4",
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": ""
+        }
+      ],
+      "indices": [
+        {
+          "id": 6,
+          "fields": [
+            "user_id",
+            "fecha_real"
+          ],
+          "name": "idx_registro_user_fecha",
+          "unique": false
+        },
+        {
+          "id": 7,
+          "fields": [
+            "dia_plantilla_id",
+            "fecha_real"
+          ],
+          "name": "idx_registro_dia_fecha",
+          "unique": false
+        }
+      ],
+      "x": -119.88018348321475,
+      "y": -270.03428479612023,
+      "locked": false
+    }
+  ],
+  "relationships": [
+    {
+      "name": "fk_users_id_dias_plantilla",
+      "startTableId": "A-QznMB5m339z0B7Kj--4",
+      "endTableId": "wCcBmDyHrBifUYQpNlnXc",
+      "endFieldId": "fcHLu6Y0Ydp3nVZujmn3a",
+      "startFieldId": "dE6hPS_ZyUibg1kcNntu8",
+      "id": "JVZ1xKpWOmU-KtPpB5Tly",
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "cardinality": "one_to_many"
+    },
+    {
+      "name": "fk_users_id_grupos_musculares",
+      "startTableId": "A-QznMB5m339z0B7Kj--4",
+      "endTableId": "Id9DQLE2xZepVelYD0mxa",
+      "endFieldId": "lUgEI0Du8pLXcfYL6UgXa",
+      "startFieldId": "dE6hPS_ZyUibg1kcNntu8",
+      "id": "tk3mSJPto4CqGC59bYoj7",
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "cardinality": "one_to_many"
+    },
+    {
+      "name": "fk_users_id_ejercicios",
+      "startTableId": "A-QznMB5m339z0B7Kj--4",
+      "endTableId": "veKGMDYzaaMYQ3KD-Wj8f",
+      "endFieldId": "lmrE21qaP4VNiif5MgqRr",
+      "startFieldId": "dE6hPS_ZyUibg1kcNntu8",
+      "id": "5JJBMTSbuDnoR-AJLTXLP",
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "cardinality": "one_to_many"
+    },
+    {
+      "name": "fk_dias_plantilla_id_dia_grupo",
+      "startTableId": "wCcBmDyHrBifUYQpNlnXc",
+      "endTableId": "WiuV4uIdc-lwlsGhc5j7f",
+      "endFieldId": "a6OkgXRiDHHeXzSuxTkAz",
+      "startFieldId": "KV2vbVVg6_H4okLblSS73",
+      "id": "ce7y20uWEgjAKiK4Mch4o",
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "cardinality": "one_to_many"
+    },
+    {
+      "name": "fk_grupos_musculares_id_dia_grupo",
+      "startTableId": "Id9DQLE2xZepVelYD0mxa",
+      "endTableId": "WiuV4uIdc-lwlsGhc5j7f",
+      "endFieldId": "tSiF3N0w5Q0he7x1XaaoK",
+      "startFieldId": "k7Q1TGvTpMi3Qw7UF2Dn4",
+      "id": "wAEZxI3RsgY-Ohm8rTC0k",
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "cardinality": "one_to_many"
+    },
+    {
+      "name": "fk_dia_grupo_id_dia_ejercicio",
+      "startTableId": "WiuV4uIdc-lwlsGhc5j7f",
+      "endTableId": "rp5qxnkGJuY7LeyGxwl5N",
+      "endFieldId": "v2P0R658aydkzVLj3G1vk",
+      "startFieldId": "ayOfa_4pFAGh3sru3hFhb",
+      "id": "xv0S3Vu61ka93wAJoWngJ",
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "cardinality": "one_to_many"
+    },
+    {
+      "name": "fk_ejercicios_id_dia_ejercicio",
+      "startTableId": "veKGMDYzaaMYQ3KD-Wj8f",
+      "endTableId": "rp5qxnkGJuY7LeyGxwl5N",
+      "endFieldId": "OawFDlgi2ibmYDEao8F7R",
+      "startFieldId": "iCJW7UxxTLPWudLxRT-1S",
+      "id": "zOObokoDUT8kOpHlidApc",
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "cardinality": "one_to_many"
+    },
+    {
+      "name": "fk_dia_ejercicio_id_series_plantilla",
+      "startTableId": "rp5qxnkGJuY7LeyGxwl5N",
+      "endTableId": "Ea9HmOibwtAq_7YUcDsiB",
+      "endFieldId": "kuG2q8BxVs5MU0EKzwAvj",
+      "startFieldId": "rIy0ZPIoJ7jtIoSo4lsuR",
+      "id": "RZiDo31jnJ8Brobrt2I01",
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "cardinality": "one_to_many"
+    },
+    {
+      "name": "fk_users_id_registro_entrenamientos",
+      "startTableId": "A-QznMB5m339z0B7Kj--4",
+      "endTableId": "bPAYJAqScFleBLyAjb45a",
+      "endFieldId": "wsBE36unti1lzzhOYQ9bi",
+      "startFieldId": "dE6hPS_ZyUibg1kcNntu8",
+      "id": "sh5eC41Q4Ev5WhXFbug0y",
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "cardinality": "one_to_many"
+    },
+    {
+      "name": "fk_dias_plantilla_id_registro_entrenamientos",
+      "startTableId": "wCcBmDyHrBifUYQpNlnXc",
+      "endTableId": "bPAYJAqScFleBLyAjb45a",
+      "endFieldId": "s0mPYoa557lpWBPBGrwE1",
+      "startFieldId": "KV2vbVVg6_H4okLblSS73",
+      "id": "7_UJRTO2FQ_inZQnlO1Im",
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "cardinality": "one_to_many"
+    },
+    {
+      "name": "fk_ejercicios_id_registro_entrenamientos",
+      "startTableId": "veKGMDYzaaMYQ3KD-Wj8f",
+      "endTableId": "bPAYJAqScFleBLyAjb45a",
+      "endFieldId": "MeU05Agm1SO5GaKB40j4m",
+      "startFieldId": "iCJW7UxxTLPWudLxRT-1S",
+      "id": "juBsPig0wDzY_usni1_no",
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "cardinality": "one_to_many"
+    }
+  ],
+  "notes": [],
+  "subjectAreas": [],
+  "database": "sqlite",
+  "title": "Untitled Diagram"
+}
