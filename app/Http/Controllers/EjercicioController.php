@@ -4,62 +4,67 @@ namespace App\Http\Controllers;
 
 use App\Models\Ejercicio;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\Rule;
 
 class EjercicioController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Mostrar lista de ejercicios del usuario autenticado.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    // En controlador (cambiar respuestas JsonResponse por views)
+    public function index(Request $request)
     {
-        //
+        $ejercicios = Ejercicio::where('user_id', auth()->id())
+                            ->orderBy('nombre')
+                            ->paginate(15);
+        return view('ejercicios.index', compact('ejercicios'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('ejercicios.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        // 1. Validar los datos del formulario
+            $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+            'video_url' => 'nullable|url|max:500',
+        ]);
+
+        // 2. Crear el ejercicio asignando el user_id automáticamente
+        Ejercicio::create([
+            'user_id' => auth()->id(),           // ← importante: usuario logueado
+            'nombre' => $validated['nombre'],
+            'descripcion' => $validated['descripcion'] ?? null,
+            'video_url' => $validated['video_url'] ?? null,
+        ]);
+
+        // 3. Redirigir con mensaje de éxito
+        return redirect()->route('ejercicios.index')->with('success', 'Ejercicio creado correctamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Ejercicio $ejercicio)
+
+    public function edit($id)
     {
-        //
+        $ejercicio = Ejercicio::where('user_id', auth()->id())->findOrFail($id);
+        return view('ejercicios.edit', compact('ejercicio'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Ejercicio $ejercicio)
+    public function update(Request $request, $id)
     {
-        //
+        // similar a store
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Ejercicio $ejercicio)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Ejercicio $ejercicio)
-    {
-        //
+        // similar al destroy de API
+        return redirect()->route('ejercicios.index')->with('success', 'Eliminado');
     }
 }
