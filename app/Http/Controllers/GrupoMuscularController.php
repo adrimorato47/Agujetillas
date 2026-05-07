@@ -7,59 +7,59 @@ use Illuminate\Http\Request;
 
 class GrupoMuscularController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $grupos = GrupoMuscular::where('user_id', auth()->id())
+                               ->orderBy('nombre')
+                               ->paginate(15);
+        return view('grupos-musculares.index', compact('grupos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('grupos-musculares.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+        ]);
+
+        GrupoMuscular::create([
+            'user_id' => auth()->id(),
+            'nombre' => $validated['nombre'],
+        ]);
+
+        return redirect()->route('grupos-musculares.index')
+                         ->with('success', 'Grupo muscular creado.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(GrupoMuscular $grupoMuscular)
+    public function edit($id)
     {
-        //
+        $grupo = GrupoMuscular::where('user_id', auth()->id())->findOrFail($id);
+        return view('grupos-musculares.edit', compact('grupo'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(GrupoMuscular $grupoMuscular)
+    public function update(Request $request, $id)
     {
-        //
+        $grupo = GrupoMuscular::where('user_id', auth()->id())->findOrFail($id);
+        $validated = $request->validate(['nombre' => 'required|string|max:255']);
+        $grupo->update($validated);
+        return redirect()->route('grupos-musculares.index')
+                         ->with('success', 'Grupo actualizado.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, GrupoMuscular $grupoMuscular)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(GrupoMuscular $grupoMuscular)
-    {
-        //
+        $grupo = GrupoMuscular::where('user_id', auth()->id())->findOrFail($id);
+        // Opcional: verificar si está siendo usado en dia_grupo
+        if ($grupo->diaGrupos()->exists()) {
+            return redirect()->route('grupos-musculares.index')
+                             ->with('error', 'No se puede eliminar porque está en uso.');
+        }
+        $grupo->delete();
+        return redirect()->route('grupos-musculares.index')
+                         ->with('success', 'Grupo eliminado.');
     }
 }

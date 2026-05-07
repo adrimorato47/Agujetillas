@@ -16,7 +16,9 @@ class EjercicioController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     // En controlador (cambiar respuestas JsonResponse por views)
-    public function index(Request $request)
+    // app/Http/Controllers/EjercicioController.php
+
+    public function index()
     {
         $ejercicios = Ejercicio::where('user_id', auth()->id())
                             ->orderBy('nombre')
@@ -31,25 +33,21 @@ class EjercicioController extends Controller
 
     public function store(Request $request)
     {
-        // 1. Validar los datos del formulario
-            $validated = $request->validate([
+        $validated = $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'video_url' => 'nullable|url|max:500',
         ]);
 
-        // 2. Crear el ejercicio asignando el user_id automáticamente
         Ejercicio::create([
-            'user_id' => auth()->id(),           // ← importante: usuario logueado
+            'user_id' => auth()->id(),
             'nombre' => $validated['nombre'],
             'descripcion' => $validated['descripcion'] ?? null,
             'video_url' => $validated['video_url'] ?? null,
         ]);
 
-        // 3. Redirigir con mensaje de éxito
         return redirect()->route('ejercicios.index')->with('success', 'Ejercicio creado correctamente.');
     }
-
 
     public function edit($id)
     {
@@ -59,12 +57,22 @@ class EjercicioController extends Controller
 
     public function update(Request $request, $id)
     {
-        // similar a store
+        $ejercicio = Ejercicio::where('user_id', auth()->id())->findOrFail($id);
+
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+            'video_url' => 'nullable|url|max:500',
+        ]);
+
+        $ejercicio->update($validated);
+        return redirect()->route('ejercicios.index')->with('success', 'Ejercicio actualizado.');
     }
 
     public function destroy($id)
     {
-        // similar al destroy de API
-        return redirect()->route('ejercicios.index')->with('success', 'Eliminado');
+        $ejercicio = Ejercicio::where('user_id', auth()->id())->findOrFail($id);
+        $ejercicio->delete();
+        return redirect()->route('ejercicios.index')->with('success', 'Ejercicio eliminado.');
     }
 }

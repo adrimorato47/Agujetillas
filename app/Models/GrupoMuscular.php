@@ -7,18 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class GrupoMuscular extends Model
 {
     protected $table = 'grupos_musculares';
+    protected $fillable = ['user_id', 'nombre'];
 
-    protected $fillable = ['nombre'];
-
-    public function diaGrupos()
+    public function user()
     {
-        return $this->hasMany(DiaGrupo::class);
-    }
-
-    public function dias()
-    {
-        return $this->belongsToMany(Dia::class, 'dia_grupo')
-                    ->withPivot('orden')
-                    ->withTimestamps();
+        return $this->belongsTo(User::class);
     }
 }

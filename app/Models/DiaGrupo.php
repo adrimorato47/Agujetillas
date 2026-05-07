@@ -4,24 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DiaEjercicio extends Model
+class DiaGrupo extends Model
 {
-    protected $table = 'dia_ejercicio';
+    protected $table = 'dia_grupo';
+    protected $fillable = ['dia_plantilla_id', 'grupo_muscular_id', 'orden'];
+    protected $casts = ['orden' => 'integer'];
 
-    protected $fillable = ['dia_grupo_id', 'ejercicio_id', 'orden_ejercicio'];
-
-    public function diaGrupo()
+    public function diaPlantilla()
     {
-        return $this->belongsTo(DiaGrupo::class);
+        return $this->belongsTo(DiaPlantilla::class);
     }
 
-    public function ejercicio()
+    public function grupoMuscular()
     {
-        return $this->belongsTo(Ejercicio::class);
-    }
-
-    public function series()
-    {
-        return $this->hasMany(Serie::class);
+        return $this->belongsTo(GrupoMuscular::class);
     }
 }
