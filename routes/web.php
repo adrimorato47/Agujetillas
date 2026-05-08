@@ -1,39 +1,30 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EjercicioController;
 use App\Http\Controllers\GrupoMuscularController;
 use App\Http\Controllers\DiaPlantillaController;
 use App\Http\Controllers\DiaGrupoController;
-use Illuminate\Support\Facades\Route;
 
-// Rutas públicas
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Rutas protegidas por autenticación
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-    // Rutas de ejercicios (recurso completo)
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
     Route::resource('ejercicios', EjercicioController::class);
-
     Route::resource('grupos-musculares', GrupoMuscularController::class);
-
-    // Rutas de días plantilla (recurso completo)
     Route::resource('dias-plantilla', DiaPlantillaController::class);
-
-    // Para asignar grupos a un día específico
-    Route::post('/dia-grupo', [DiaGrupoController::class, 'store'])->name('dia-grupo.store');
-    Route::delete('/dia-grupo/{id}', [DiaGrupoController::class, 'destroy'])->name('dia-grupo.destroy');
+    Route::resource('dias-grupo', DiaGrupoController::class);
 
 });
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
-    ->middleware('auth')
-    ->name('logout');
 
-require __DIR__.'/auth.php'; // las rutas de Breeze (login, register...)
-
-
+require __DIR__.'/auth.php';

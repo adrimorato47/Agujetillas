@@ -1,79 +1,36 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Agujetillas') }}</title>
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Scripts (Vite) -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
-        <!-- Navbar -->
-        <nav class="bg-white shadow">
-            <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div class="flex justify-between h-16">
-                    <div class="flex items-center">
-                        <a href="{{ url('/') }}" class="text-xl font-bold text-gray-800">
-                            💪 Agujetillas
-                        </a>
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
+            @include('layouts.navigation')
+
+            <!-- Page Heading -->
+            @isset($header)
+                <header class="bg-white shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
                     </div>
+                </header>
+            @endisset
 
-                    <div class="flex items-center space-x-4">
-                        @auth
-                            <span class="text-sm text-gray-700">{{ Auth::user()->name }}</span>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit" class="text-sm text-red-600 hover:text-red-800">
-                                    Cerrar sesión
-                                </button>
-                            </form>
-                        @else
-                            <a href="{{ route('login') }}" class="text-sm text-gray-700 hover:text-gray-900">Iniciar sesión</a>
-                            <a href="{{ route('register') }}" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-                                Crear cuenta
-                            </a>
-                        @endauth
-                        @auth
-                            <div class="hidden sm:flex sm:items-center sm:ml-6">
-                                <x-dropdown align="right" width="48">
-                                    <x-slot name="trigger">
-                                        <button class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none">
-                                            <span>Menú</span>
-                                            <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                            </svg>
-                                        </button>
-                                    </x-slot>
-                                    <x-slot name="content">
-                                        <x-dropdown-link :href="route('dashboard')">Dashboard</x-dropdown-link>
-                                        <x-dropdown-link :href="route('ejercicios.index')">Mis ejercicios</x-dropdown-link>
-                                        <x-dropdown-link :href="route('grupos-musculares.index')">
-                                            {{ __('Grupos musculares') }}
-                                        </x-dropdown-link>
-                                        <x-dropdown-link :href="route('dias-plantilla.index')">
-                                            {{ __('Días plantilla') }}
-                                        </x-dropdown-link>
-                                    </x-slot>
-                                </x-dropdown>
-                            </div>
-                        @endauth
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Contenido dinámico -->
-        <main>
-            @yield('content')
-        </main>
-    </div>
-</body>
+            <!-- Page Content -->
+            <main>
+                @yield('content')
+            </main>
+        </div>
+    </body>
 </html>
