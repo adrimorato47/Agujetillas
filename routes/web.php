@@ -25,6 +25,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('dias-plantilla', DiaPlantillaController::class);
     Route::resource('dias-grupo', DiaGrupoController::class);
 
+    Route::post('/dia-grupo', [DiaGrupoController::class, 'store'])->name('dia-grupo.store');
+    Route::delete('/dia-grupo/{id}', [DiaGrupoController::class, 'destroy'])->name('dia-grupo.destroy');
+
+    Route::post('/dia-ejercicio', [DiaEjercicioController::class, 'store'])->name('dia-ejercicio.store');
+    Route::delete('/dia-ejercicio/{id}', [DiaEjercicioController::class, 'destroy'])->name('dia-ejercicio.destroy');
+
 });
 
 require __DIR__.'/auth.php';

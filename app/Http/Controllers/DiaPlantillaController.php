@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DiaPlantilla;
 use App\Models\GrupoMuscular;
+use App\Models\Ejercicio;
 use Illuminate\Http\Request;
 
 class DiaPlantillaController extends Controller
@@ -57,14 +58,23 @@ class DiaPlantillaController extends Controller
     }
     public function show($id)
     {
-        $dia = DiaPlantilla::with('gruposMusculares')
-                        ->where('user_id', auth()->id())
-                        ->findOrFail($id);
-        // Obtener todos los grupos del usuario para el select
-        $gruposDisponibles = GrupoMuscular::where('user_id', auth()->id())
-                                        ->orderBy('nombre')
-                                        ->get();
-        return view('dias-plantilla.show', compact('dia', 'gruposDisponibles'));
+         $dia = DiaPlantilla::where('user_id', auth()->id())
+        ->with(['gruposMusculares' => function ($query) {
+            $query->withPivot('id');
+        }])
+        ->findOrFail($id);
+
+        // Cargar los ejercicios asignados a cada relación dia_grupo
+        $dia->load(['diaGrupos' => function ($query) {
+            $query->with(['ejercicios' => function ($q) {
+                $q->with('ejercicio');  // para acceder a los datos del ejercicio
+            }]);
+        }]);
+
+        $gruposDisponibles = GrupoMuscular::where('user_id', auth()->id())->orderBy('nombre')->get();
+        $ejerciciosDisponibles = Ejercicio::where('user_id', auth()->id())->orderBy('nombre')->get();
+
+        return view('dias-plantilla.show', compact('dia', 'gruposDisponibles', 'ejerciciosDisponibles'));
     }
 
     public function destroy($id)

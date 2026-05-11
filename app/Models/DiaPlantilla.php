@@ -21,13 +21,18 @@ class DiaPlantilla extends Model
 
     public function gruposMusculares()
     {
-        return $this->belongsToMany(GrupoMuscular::class, 'dia_grupo', 'dia_plantilla_id')
-                    ->withPivot('orden')
-                    ->withTimestamps();
+        return $this->belongsToMany(GrupoMuscular::class, 'dia_grupo')
+                ->withPivot('id', 'orden')
+                ->withTimestamps();
     }
 
     public function registros()
     {
         return $this->hasMany(RegistroEntrenamiento::class, 'dia_plantilla_id');
+    }
+
+    public function diaGrupos()
+    {
+        return $this->hasMany(DiaGrupo::class, 'dia_plantilla_id');
     }
 }

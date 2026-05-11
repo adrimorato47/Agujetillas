@@ -19,4 +19,9 @@ class DiaGrupo extends Model
     {
         return $this->belongsTo(GrupoMuscular::class);
     }
+
+    public function ejercicios()
+    {
+        return $this->hasMany(DiaEjercicio::class);
+    }
 }
