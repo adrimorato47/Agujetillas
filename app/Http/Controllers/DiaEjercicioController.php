@@ -17,21 +17,16 @@ class DiaEjercicioController extends Controller
             'orden' => 'nullable|integer|min:0',
         ]);
 
-        // Verificar que el día-grupo pertenece al usuario (a través de la cadena)
         $diaGrupo = DiaGrupo::with('diaPlantilla')->findOrFail($validated['dia_grupo_id']);
-        if ($diaGrupo->diaPlantilla->user_id !== auth()->id()) {
-            abort(403);
-        }
+        if ($diaGrupo->diaPlantilla->user_id !== auth()->id()) abort(403);
 
-        // Verificar que el ejercicio pertenece al usuario
         $ejercicio = Ejercicio::where('user_id', auth()->id())->findOrFail($validated['ejercicio_id']);
 
-        // Evitar duplicados
         $exists = DiaEjercicio::where('dia_grupo_id', $diaGrupo->id)
                               ->where('ejercicio_id', $ejercicio->id)
                               ->exists();
         if ($exists) {
-            return redirect()->back()->with('error', 'Este ejercicio ya está asignado a este grupo.');
+            return redirect()->back()->with('error', 'Este ejercicio ya está asignado.');
         }
 
         DiaEjercicio::create([
@@ -46,9 +41,7 @@ class DiaEjercicioController extends Controller
     public function destroy($id)
     {
         $asignacion = DiaEjercicio::with('diaGrupo.diaPlantilla')->findOrFail($id);
-        if ($asignacion->diaGrupo->diaPlantilla->user_id !== auth()->id()) {
-            abort(403);
-        }
+        if ($asignacion->diaGrupo->diaPlantilla->user_id !== auth()->id()) abort(403);
         $asignacion->delete();
         return redirect()->back()->with('success', 'Ejercicio removido.');
     }

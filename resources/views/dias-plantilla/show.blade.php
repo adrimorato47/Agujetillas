@@ -45,74 +45,85 @@
                 </div>
 
                 <!-- Listado de grupos asignados con sus ejercicios -->
-                <h2 class="text-xl font-semibold mb-4">Grupos asignados</h2>
-                @if($dia->gruposMusculares->count() > 0)
-                    @foreach($dia->diaGrupos as $diaGrupo)
-                        <div class="mb-6 border rounded p-4 bg-gray-50">
-                            <div class="flex justify-between items-center">
-                                <h3 class="text-lg font-semibold">{{ $diaGrupo->grupoMuscular->nombre }}</h3>
-                                <p class="text-sm text-gray-500">Orden: {{ $diaGrupo->orden ?? 0 }}</p>
-                            </div>
+                <!-- Listado de grupos asignados -->
+<h2 class="text-xl font-semibold mb-4">Grupos asignados</h2>
+@if($dia->diaGrupos->count() > 0)
+    @foreach($dia->diaGrupos->sortBy('orden') as $diaGrupo)   {{-- orden seguro --}}
+        <div class="mb-6 border rounded p-4 bg-gray-50">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h3 class="text-lg font-semibold">{{ $diaGrupo->grupoMuscular->nombre }}</h3>
+                    <p class="text-sm text-gray-500">Orden: {{ $diaGrupo->orden ?? 0 }}</p>
+                </div>
+                <!-- Botón eliminar grupo -->
+                <form action="{{ route('dia-grupo.destroy', $diaGrupo->id) }}" method="POST" onsubmit="return confirm('¿Eliminar este grupo?')">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded">
+                        Eliminar grupo
+                    </button>
+                </form>
+            </div>
 
-                            <!-- Listado de ejercicios asignados a este grupo -->
-                            @if($diaGrupo->ejercicios->count() > 0)
-                                <table class="min-w-full mt-3 bg-white border">
-                                    <thead>
-                                        <tr class="bg-gray-100">
-                                            <th class="px-4 py-2 text-left">Ejercicio</th>
-                                            <th class="px-4 py-2 text-left">Orden</th>
-                                            <th class="px-4 py-2">Acciones</th>
-                                        </table>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($diaGrupo->ejercicios as $asignacionEj)
-                                        <tr class="border-t">
-                                            <td class="px-4 py-2">{{ $asignacionEj->ejercicio->nombre }}</td>
-                                            <td class="px-4 py-2">{{ $asignacionEj->orden ?? '—' }}</td>
-                                            <td class="px-4 py-2 text-center">
-                                                <form action="{{ route('dia-ejercicio.destroy', $asignacionEj->id) }}" method="POST" onsubmit="return confirm('¿Eliminar este ejercicio?')">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="text-red-600 hover:text-red-900">Eliminar</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            @else
-                                <p class="text-gray-500 mt-3">No hay ejercicios asignados a este grupo aún.</p>
-                            @endif
-
-                            <!-- Formulario para añadir ejercicio a este grupo -->
-                            <div class="mt-4 border-t pt-4">
-                                <h4 class="font-medium mb-2">Añadir ejercicio</h4>
-                                <form action="{{ route('dia-ejercicio.store') }}" method="POST" class="flex flex-wrap gap-2 items-end">
+            <!-- Listado de ejercicios asignados -->
+            @if($diaGrupo->ejercicios->count() > 0)
+                <table class="min-w-full mt-3 bg-white border">
+                    <thead>
+                        <tr class="bg-gray-100">
+                            <th class="px-4 py-2 text-left">Ejercicio</th>
+                            <th class="px-4 py-2 text-left">Orden</th>
+                            <th class="px-4 py-2">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($diaGrupo->ejercicios->sortBy('orden') as $asignacionEj)
+                        <tr class="border-t">
+                            <td class="px-4 py-2">{{ $asignacionEj->ejercicio->nombre }}</td>
+                            <td class="px-4 py-2">{{ $asignacionEj->orden ?? '—' }}</td>
+                            <td class="px-4 py-2 text-center">
+                                <form action="{{ route('dia-ejercicio.destroy', $asignacionEj->id) }}" method="POST" onsubmit="return confirm('¿Eliminar este ejercicio?')">
                                     @csrf
-                                    <input type="hidden" name="dia_grupo_id" value="{{ $diaGrupo->id }}">
-                                    <div>
-                                        <label for="ejercicio_id_{{ $diaGrupo->id }}" class="block text-sm text-gray-600">Ejercicio</label>
-                                        <select name="ejercicio_id" id="ejercicio_id_{{ $diaGrupo->id }}" required class="rounded border-gray-300">
-                                            <option value="">Seleccionar...</option>
-                                            @foreach($ejerciciosDisponibles as $ej)
-                                                <option value="{{ $ej->id }}">{{ $ej->nombre }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label for="orden_{{ $diaGrupo->id }}" class="block text-sm text-gray-600">Orden</label>
-                                        <input type="number" name="orden" id="orden_{{ $diaGrupo->id }}" placeholder="Opcional" class="rounded border-gray-300 w-24">
-                                    </div>
-                                    <div>
-                                        <button type="submit" class="bg-green-600 hover:bg-green-800 text-white px-4 py-2 rounded">Asignar</button>
-                                    </div>
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:text-red-900">Eliminar</button>
                                 </form>
-                            </div>
-                        </div>
-                    @endforeach
-                @else
-                    <p class="text-gray-500">Aún no hay grupos asignados. Agrega uno arriba.</p>
-                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @else
+                <p class="text-gray-500 mt-3">No hay ejercicios asignados a este grupo aún.</p>
+            @endif
+
+            <!-- Formulario para añadir ejercicio -->
+            <div class="mt-4 border-t pt-4">
+                <h4 class="font-medium mb-2">Añadir ejercicio</h4>
+                <form action="{{ route('dia-ejercicio.store') }}" method="POST" class="flex flex-wrap gap-2 items-end">
+                    @csrf
+                    <input type="hidden" name="dia_grupo_id" value="{{ $diaGrupo->id }}">
+                    <div>
+                        <label for="ejercicio_id_{{ $diaGrupo->id }}" class="block text-sm text-gray-600">Ejercicio</label>
+                        <select name="ejercicio_id" id="ejercicio_id_{{ $diaGrupo->id }}" required class="rounded border-gray-300">
+                            <option value="">Seleccionar...</option>
+                            @foreach($ejerciciosDisponibles as $ej)
+                                <option value="{{ $ej->id }}">{{ $ej->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <label for="orden_{{ $diaGrupo->id }}" class="block text-sm text-gray-600">Orden</label>
+                        <input type="number" name="orden" id="orden_{{ $diaGrupo->id }}" placeholder="Opcional" class="rounded border-gray-300 w-24">
+                    </div>
+                    <div>
+                        <button type="submit" class="bg-green-600 hover:bg-green-800 text-white px-4 py-2 rounded">Asignar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endforeach
+    @else
+        <p class="text-gray-500">Aún no hay grupos asignados. Agrega uno arriba.</p>
+    @endif
             </div>
         </div>
     </div>

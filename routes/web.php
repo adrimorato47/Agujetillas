@@ -7,6 +7,10 @@ use App\Http\Controllers\GrupoMuscularController;
 use App\Http\Controllers\DiaPlantillaController;
 use App\Http\Controllers\DiaGrupoController;
 
+Route::get('/test-controller', function () {
+    return class_exists('App\Http\Controllers\DiaEjercicioController') ? 'Existe' : 'No existe';
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -28,8 +32,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/dia-grupo', [DiaGrupoController::class, 'store'])->name('dia-grupo.store');
     Route::delete('/dia-grupo/{id}', [DiaGrupoController::class, 'destroy'])->name('dia-grupo.destroy');
 
-    Route::post('/dia-ejercicio', [DiaEjercicioController::class, 'store'])->name('dia-ejercicio.store');
-    Route::delete('/dia-ejercicio/{id}', [DiaEjercicioController::class, 'destroy'])->name('dia-ejercicio.destroy');
+    //Route::post('/dia-ejercicio', [DiaEjercicioController::class, 'store'])->name('dia-ejercicio.store');
+    //Route::delete('/dia-ejercicio/{id}', [DiaEjercicioController::class, 'destroy'])->name('dia-ejercicio.destroy');
+    Route::post('/dia-ejercicio', 'App\Http\Controllers\DiaEjercicioController@store')->name('dia-ejercicio.store');
+    Route::delete('/dia-ejercicio/{id}', 'App\Http\Controllers\DiaEjercicioController@destroy')->name('dia-ejercicio.destroy');
 
 });
 

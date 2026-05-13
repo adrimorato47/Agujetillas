@@ -45,8 +45,8 @@
                     <div class="mb-3 text-4xl">📅</div>
                     <h2 class="text-xl font-semibold">Rutinas</h2>
                     <p class="mt-2 mb-4 text-gray-600">Crea y edita tus rutinas semanales.</p>
-                    <a href="#" class="inline-block px-4 py-2 text-white bg-green-500 rounded hover:bg-green-700">
-                        Próximamente
+                    <a href="{{ route('dias-plantilla.index') }}" class="inline-block px-4 py-2 text-white bg-green-500 rounded hover:bg-green-700">
+                        Ver rutinas
                     </a>
                 </div>
             </div>

@@ -58,21 +58,26 @@ class DiaPlantillaController extends Controller
     }
     public function show($id)
     {
-         $dia = DiaPlantilla::where('user_id', auth()->id())
-        ->with(['gruposMusculares' => function ($query) {
-            $query->withPivot('id');
+        $dia = DiaPlantilla::where('user_id', auth()->id())
+        ->with(['gruposMusculares' => function ($q) {
+            $q->withPivot('id', 'orden');
         }])
         ->findOrFail($id);
 
-        // Cargar los ejercicios asignados a cada relación dia_grupo
-        $dia->load(['diaGrupos' => function ($query) {
-            $query->with(['ejercicios' => function ($q) {
-                $q->with('ejercicio');  // para acceder a los datos del ejercicio
+        // Cargar los diaGrupos ordenados por 'orden' (de menor a mayor)
+        $dia->load(['diaGrupos' => function ($q) {
+            $q->orderBy('orden', 'asc')
+            ->with(['ejercicios' => function ($q2) {
+                $q2->with('ejercicio')->orderBy('orden', 'asc');
             }]);
         }]);
 
-        $gruposDisponibles = GrupoMuscular::where('user_id', auth()->id())->orderBy('nombre')->get();
-        $ejerciciosDisponibles = Ejercicio::where('user_id', auth()->id())->orderBy('nombre')->get();
+        $gruposDisponibles = GrupoMuscular::where('user_id', auth()->id())
+                                        ->orderBy('nombre')
+                                        ->get();
+        $ejerciciosDisponibles = Ejercicio::where('user_id', auth()->id())
+                                        ->orderBy('nombre')
+                                        ->get();
 
         return view('dias-plantilla.show', compact('dia', 'gruposDisponibles', 'ejerciciosDisponibles'));
     }
